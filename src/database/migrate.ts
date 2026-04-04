@@ -1,11 +1,33 @@
 import fs from 'node:fs';
 import db from './knex';
 
+const ON_UPDATE_TIMESTAMP_FUNCTION = `
+  CREATE OR REPLACE FUNCTION on_update_timestamp()
+  RETURNS trigger AS $$
+  BEGIN
+    NEW.updated_at = now();
+    RETURN NEW;
+  END;
+$$ language 'plpgsql';
+`;
+
+function onUpdateTrigger(table: string) {
+  return `
+    CREATE TRIGGER ${table}_updated_at
+    BEFORE UPDATE ON ${table}
+    FOR EACH ROW
+    EXECUTE PROCEDURE on_update_timestamp();
+  `;
+}
+
 // Only detect new table additions, not column changes or table deletions.
 export async function runMigration(path: string) {
   if (process.env.DB_ENABLED === 'false') {
     return console.log('Database migration disabled.');
   }
+  
+  // create update timestamp function
+  await db.raw(ON_UPDATE_TIMESTAMP_FUNCTION);
   
   console.log(`Migrating from ${path}`);
   const schema = JSON.parse(fs.readFileSync(path, 'utf-8'));
@@ -25,11 +47,17 @@ export async function runMigration(path: string) {
       Object.entries(sample).forEach(([col, val]) => {
         if (col === 'id') return;
         
-        if (typeof val === 'number') table.integer(col);
+        if (col === 'password') table.string(col, 60);
+        else if (typeof val === 'number') table.integer(col);
         else if (typeof val === 'boolean') table.boolean(col);
         else table.text(col);
       });
+      
+      table.timestamps(true, true);
     });
+    if (db.getClient() === 'pg') {
+      await db.raw(onUpdateTrigger(tableName));
+    }
     console.log(`Created table: "${tableName}"`);
   }
   if (!changed) {
