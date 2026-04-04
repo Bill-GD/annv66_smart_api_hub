@@ -17,7 +17,7 @@
 ### 1. Khởi tạo & Auto-Migration (1đ)
 - [ ] Chạy từ file `schema.json` tự chọn (tối thiểu 3 bảng có liên kết, bảng `users` phải có `email`, `password`, `role`).
 - [ ] Tự động nội suy kiểu dữ liệu và tạo bảng PostgreSQL nếu chưa có.
-- [ ] Endpoint `GET /health` trả về status và ping DB thật.
+- [x] Endpoint `GET /health` trả về status và ping DB thật.
 
 ### 2. Dynamic CRUD (2đ)
 - [ ] **GET `/:resource`**: Lọc các field với `?_fields=col1,col2`.

@@ -14,4 +14,7 @@ const db = knex({
   },
 });
 
-export default db;
+export default {
+  ...db,
+  getClient: (): string => `${db.client.config.client}`,
+};

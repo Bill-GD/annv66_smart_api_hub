@@ -13,6 +13,7 @@ export default class HealthController {
     res.status(200).json({
       webStatus: 'ok',
       webUptime: process.uptime(),
+      databaseClient: db.getClient(),
       databaseStatus: dbStatus ? 'ok' : 'disconnected',
     });
   }
