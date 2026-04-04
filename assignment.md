@@ -1,19 +1,14 @@
----
-sidebar_position: 2
-title: "📝 Long Assignment: Smart API Hub"
-description: "Bài tập lớn cá nhân — Xây dựng REST API Platform bằng Node.js + TypeScript"
----
-
 # 📝 Long Assignment: Smart API Hub
 
-**Hình thức:** Cá nhân | **Thời gian:** 2–3 tuần | **Mục tiêu:** Xây dựng một REST API Platform tự động sinh API từ file `schema.json`.
+**Hình thức:** Cá nhân | **Thời gian:** 1 tuần | **Mục tiêu:** Xây dựng một REST API Platform tự động sinh API từ file `schema.json`.
 
 ---
 
 ## 🛠 Tech Stack Bắt Buộc
 - **Node.js (≥ 20), TypeScript (Strict Mode), Express.js**
 - **PostgreSQL (≥ 15), Knex.js** (Có thể dùng ORM như Prisma/TypeORM thay thế)
-- **Zod, JWT/Bcrypt, Vitest + Supertest, Docker/Docker-compose**
+- **Zod, JWT/Bcrypt**
+- **Vitest + Supertest, Docker/Docker-compose**
 
 ---
 
