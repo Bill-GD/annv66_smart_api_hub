@@ -5,11 +5,17 @@ import { ResourceRequest, ResourceResponse } from '../utils/types';
 export default class ResourceController {
   static async getAll(req: ResourceRequest, res: ResourceResponse) {
     const { resource: tableName } = req.params;
+    const { columns: selects, sorting, pagination } = res.locals;
     
     const query = db(tableName)
-      .select(...res.locals.columns);
+      .select(...selects)
+      .orderBy(sorting.field, sorting.order)
+      .offset(pagination.offset)
+      .limit(pagination.limit);
     
     const result = await query;
+    
+    res.setHeader('X-Total-Count', result.length);
     res.status(HttpStatus.OK).json(result);
   }
   

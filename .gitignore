@@ -16,3 +16,6 @@
 # temp directory
 .temp
 .tmp
+
+# other
+notes.md

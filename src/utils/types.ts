@@ -9,7 +9,7 @@ export type ResourceRequest = Request<
     _page: string,
     _limit: string,
     _sort: string,
-    _order: string,
+    _order: 'asc' | 'desc',
     _gte: string,
     _lte: string,
     _ne: string,
@@ -23,6 +23,8 @@ export type ResourceRequest = Request<
 export type ResourceResponse = Response<
   any,
   {
-    columns: string[]
+    columns: string[],
+    pagination: { offset: number, limit: number },
+    sorting: { field: string, order: 'asc' | 'desc' },
   }
 >;

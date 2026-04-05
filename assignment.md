@@ -29,7 +29,7 @@
   - [x] Whitelist validate input `tableName` (chống SQL Injection).
 
 ### 3. Advanced Query (1.5đ)
-- [ ] **Pagination & Sorting**: `_page`, `_limit`, `_sort`, `_order` (trả về header `X-Total-Count`).
+- [x] **Pagination & Sorting**: `_page`, `_limit`, `_sort`, `_order` (trả về header `X-Total-Count`).
 - [ ] **Filtering**: `_gte`, `_lte`, `_ne`, `_like`.
 - [ ] **Search**: `?q=keyword` tìm kiếm trên các cột text.
 
