@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import db from '../database/knex';
+import { getDBClient } from '../utils/helpers';
 import HttpStatus from '../utils/http-status';
 
 export default class HealthController {
@@ -14,7 +15,7 @@ export default class HealthController {
     res.status(HttpStatus.OK).json({
       webStatus: 'ok',
       webUptime: process.uptime(),
-      databaseClient: db.getClient(),
+      databaseClient: getDBClient(),
       databaseStatus: dbStatus ? 'ok' : 'disconnected',
     });
   }

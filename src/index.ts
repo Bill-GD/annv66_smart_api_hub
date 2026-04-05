@@ -6,7 +6,6 @@ import healthRouter from './routes/health.router';
 import resourceRouter from './routes/resource.router';
 import HttpStatus from './utils/http-status';
 
-(async () => await runMigration('./schema.json'))();
 
 const app = express();
 
@@ -24,6 +23,17 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 const port = process.env.PORT || 2000;
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+
+async function bootstrap() {
+  try {
+    await runMigration('./schema.json');
+  } catch (e) {
+    console.log('Database not connected, skipping migration');
+  }
+  
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
+
+bootstrap();
