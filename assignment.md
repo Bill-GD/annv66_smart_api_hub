@@ -22,11 +22,11 @@
 - [x] Endpoint `GET /health` trả về status và ping DB thật.
 
 ### 2. Dynamic CRUD (2đ)
-- [ ] **GET `/:resource`**: Lọc các field với `?_fields=col1,col2`.
+- [x] **GET `/:resource`**: Lọc các field với `?_fields=col1,col2`.
 - [ ] **POST / PUT / PATCH / DELETE `/:resource/:id`**:
-  - Khác biệt chuẩn giữa PUT (thay toàn bộ) vs PATCH (cập nhật 1 phần).
-  - Tự động update `updated_at`.
-  - Whitelist validate input `tableName` (chống SQL Injection).
+  - [ ] Khác biệt chuẩn giữa PUT (thay toàn bộ) vs PATCH (cập nhật 1 phần).
+  - [x] Tự động update `updated_at`.
+  - [x] Whitelist validate input `tableName` (chống SQL Injection).
 
 ### 3. Advanced Query (1.5đ)
 - [ ] **Pagination & Sorting**: `_page`, `_limit`, `_sort`, `_order` (trả về header `X-Total-Count`).

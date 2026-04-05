@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import { runMigration } from './database/migrate';
 
 import healthRouter from './routes/health.router';
+import resourceRouter from './routes/resource.router';
 import HttpStatus from './utils/http-status';
 
 (async () => await runMigration('./schema.json'))();
@@ -13,6 +14,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/health', healthRouter);
+app.use('/:resource', resourceRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(HttpStatus.INTERNAL_ERROR).json({
