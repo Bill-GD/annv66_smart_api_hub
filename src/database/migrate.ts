@@ -48,8 +48,8 @@ export async function runMigration(path: string) {
       Object.entries(sample).forEach(([col, val]) => {
         if (col === 'id') return;
         
-        if (col === 'password') table.specificType(col, 'char(60)');
-        else if (typeof val === 'number') table.integer(col);
+        if (col === 'password') table.specificType(col, 'char(60)').notNullable();
+        else if (typeof val === 'number') table.integer(col).notNullable().defaultTo(0);
         else if (typeof val === 'boolean') table.boolean(col);
         else table.text(col);
       });
@@ -60,7 +60,8 @@ export async function runMigration(path: string) {
       await db.raw(onUpdateTrigger(tableName));
     }
     
-    await db(tableName).insert(sample);
+    const { id, ...insertData } = sample;
+    await db(tableName).insert(insertData);
     
     console.log(`Created table: "${tableName}" and seeded 1 record`);
   }

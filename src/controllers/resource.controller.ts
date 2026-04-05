@@ -20,22 +20,52 @@ export default class ResourceController {
   }
   
   static async getOne(req: ResourceRequest, res: ResourceResponse) {
-    res.status(HttpStatus.OK).json({ params: req.params, query: req.query });
+    const { resource: tableName, id } = req.params;
+    
+    const query = db(tableName)
+      .select(...res.locals.columns)
+      .where({ id })
+      .first();
+    
+    const result = await query;
+    res.status(HttpStatus.OK).json(result);
   }
   
   static async postOne(req: ResourceRequest, res: ResourceResponse) {
-    res.status(HttpStatus.CREATED).json({ params: req.params, body: req.body });
+    const { resource: tableName } = req.params;
+    const [{ id: newId }] = await db(tableName).insert(req.body, ['id']);
+    res.status(HttpStatus.CREATED).json({
+      id: newId,
+    });
   }
   
   static async putOne(req: ResourceRequest, res: ResourceResponse) {
-    res.status(HttpStatus.OK).json({ params: req.params, body: req.body });
+    const { resource: tableName, id } = req.params;
+    
+    const result = await db(tableName)
+      .where({ id })
+      .count('id')
+      .first();
+    
+    const count = +(result?.count ?? 0);
+    if (count <= 0) {
+      await db(tableName).insert({ id, ...req.body });
+      res.status(HttpStatus.CREATED).json({ id: +id });
+    } else {
+      await db(tableName).update(req.body).where({ id });
+      res.sendStatus(HttpStatus.NO_CONTENT);
+    }
   }
   
   static async patchOne(req: ResourceRequest, res: ResourceResponse) {
-    res.status(HttpStatus.OK).json({ params: req.params, body: req.body });
+    const { resource: tableName, id } = req.params;
+    await db(tableName).update(req.body).where({ id });
+    res.sendStatus(HttpStatus.NO_CONTENT);
   }
   
   static async deleteOne(req: ResourceRequest, res: ResourceResponse) {
-    res.status(HttpStatus.OK).json({ params: req.params });
+    const { resource: tableName, id } = req.params;
+    await db(tableName).where({ id }).delete();
+    res.sendStatus(HttpStatus.NO_CONTENT);
   }
 }
