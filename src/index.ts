@@ -16,6 +16,7 @@ app.use('/health', healthRouter);
 app.use('/:resource', resourceRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  console.error(err);
   res.status(HttpStatus.INTERNAL_ERROR).json({
     message: 'An error occurred',
     error: err.message,

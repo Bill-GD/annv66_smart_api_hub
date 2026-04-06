@@ -41,8 +41,8 @@
 
 ### 4. Relationships (Tối ưu N+1 Query) (1.5đ)
 
-- [ ] **Expand**: `GET /:resource?_expand=parentResource` (Lấy dữ liệu cha).
-- [ ] **Embed**: `GET /:resource?_embed=childResource` (Lấy dữ liệu con).
+- [x] **Expand**: `GET /:resource?_expand=parentResource` (Lấy dữ liệu cha).
+- [x] **Embed**: `GET /:resource?_embed=childResource` (Lấy dữ liệu con).
 
 ### 5. Authentication & Authorization (1.5đ)
 

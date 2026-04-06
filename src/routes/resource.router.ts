@@ -3,6 +3,7 @@ import ResourceController from '../controllers/resource.controller';
 import checkRecord from '../middlewares/check-record.middleware';
 import filtering from '../middlewares/filtering.middleware';
 import pagination from '../middlewares/pagination.middleware';
+import relation from '../middlewares/relation.middleware';
 import sorting from '../middlewares/sorting.middleware';
 import validateFields from '../middlewares/validate-fields.middleware';
 import validateResource from '../middlewares/validate-resource.middleware';
@@ -16,10 +17,11 @@ router.get('/',
   pagination,
   sorting,
   filtering,
+  relation,
   ResourceController.getAll,
 );
 
-router.get('/:id', validateFields, checkRecord, ResourceController.getOne);
+router.get('/:id', validateFields, checkRecord, relation, ResourceController.getOne);
 router.post('/', ResourceController.postOne);
 router.put('/:id', ResourceController.putOne);
 router.patch('/:id', checkRecord, ResourceController.patchOne);

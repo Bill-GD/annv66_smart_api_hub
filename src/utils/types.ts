@@ -27,5 +27,16 @@ export type ResourceResponse = Response<
       op: string,
       value: string,
     }[],
+    relation: {
+      expand?: {
+        table: string,
+        foreignKey: string,
+        prop: string,
+      },
+      embed?: {
+        table: string,
+        foreignKey: string,
+      }
+    }
   }
 >;

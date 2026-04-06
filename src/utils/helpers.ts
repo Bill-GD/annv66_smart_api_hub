@@ -16,3 +16,15 @@ export async function checkField(tableName: string, field: string) {
   const count = +(result?.count ?? 0);
   return count > 0;
 }
+
+export async function checkResource(tableName: string) {
+  const result = await db('information_schema.tables')
+    .where({
+      table_schema: 'public',
+      table_name: tableName,
+    })
+    .count('table_name')
+    .first();
+  const count = +(result?.count ?? 0);
+  return count > 0;
+}
