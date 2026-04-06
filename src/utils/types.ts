@@ -10,10 +10,6 @@ export type ResourceRequest = Request<
     _limit: string,
     _sort: string,
     _order: 'asc' | 'desc',
-    _gte: string,
-    _lte: string,
-    _ne: string,
-    _like: string,
     q: string,
     _expand: string,
     _embed: string,
@@ -26,5 +22,10 @@ export type ResourceResponse = Response<
     columns: string[],
     pagination: { offset: number, limit: number },
     sorting: { field: string, order: 'asc' | 'desc' },
+    filtering: {
+      field: string,
+      op: string,
+      value: string,
+    }[],
   }
 >;

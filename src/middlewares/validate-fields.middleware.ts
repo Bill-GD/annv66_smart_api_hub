@@ -3,7 +3,7 @@ import db from '../database/knex';
 import HttpStatus from '../utils/http-status';
 import { ResourceRequest, ResourceResponse } from '../utils/types';
 
-export default async function checkFields(req: ResourceRequest, res: ResourceResponse, next: NextFunction) {
+export default async function validateFields(req: ResourceRequest, res: ResourceResponse, next: NextFunction) {
   const { _fields } = req.query;
   if (!_fields) {
     res.locals.columns = ['*'];

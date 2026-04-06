@@ -3,7 +3,7 @@ import db from '../database/knex';
 import HttpStatus from '../utils/http-status';
 import { ResourceRequest } from '../utils/types';
 
-export default async function checkTable(req: ResourceRequest, res: Response, next: NextFunction) {
+export default async function validateResource(req: ResourceRequest, res: Response, next: NextFunction) {
   const { resource: tableName } = req.params;
   
   const result = await db('information_schema.tables')

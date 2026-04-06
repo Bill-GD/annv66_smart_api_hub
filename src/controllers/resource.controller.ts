@@ -1,17 +1,37 @@
+import { Knex } from 'knex';
 import db from '../database/knex';
 import HttpStatus from '../utils/http-status';
 import { ResourceRequest, ResourceResponse } from '../utils/types';
 
+function matchSpecialWhereClauses(
+  query: Knex.QueryBuilder,
+  filter: { field: string, op: string, value: string, },
+) {
+  switch (filter.op) {
+    case '_like':
+      query.orWhereILike(filter.field, `%${filter.value}%`);
+      break;
+  }
+}
+
 export default class ResourceController {
   static async getAll(req: ResourceRequest, res: ResourceResponse) {
     const { resource: tableName } = req.params;
-    const { columns: selects, sorting, pagination } = res.locals;
+    const { columns: selects, sorting, pagination, filtering } = res.locals;
     
     const query = db(tableName)
       .select(...selects)
       .orderBy(sorting.field, sorting.order)
       .offset(pagination.offset)
       .limit(pagination.limit);
+    
+    for (const filter of filtering) {
+      if (filter.op.startsWith('_')) {
+        matchSpecialWhereClauses(query, filter);
+      } else {
+        query.orWhere(filter.field, filter.op, filter.value);
+      }
+    }
     
     const result = await query;
     

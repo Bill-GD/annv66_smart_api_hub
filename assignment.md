@@ -36,8 +36,8 @@
 ### 3. Advanced Query (1.5đ)
 
 - [x] **Pagination & Sorting**: `_page`, `_limit`, `_sort`, `_order` (trả về header `X-Total-Count`).
-- [ ] **Filtering**: `_gte`, `_lte`, `_ne`, `_like`.
-- [ ] **Search**: `?q=keyword` tìm kiếm trên các cột text.
+- [x] **Filtering**: `_gte`, `_lte`, `_ne`, `_like`, `_eq`, `_lt`, `_gt`.
+- [ ] **Full Text Search**: `?q=keyword` tìm kiếm trên các cột text.
 
 ### 4. Relationships (Tối ưu N+1 Query) (1.5đ)
 
