@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import { runMigration } from './database/migrate';
+import authRouter from './routes/auth.router';
 
 import healthRouter from './routes/health.router';
 import resourceRouter from './routes/resource.router';
@@ -13,6 +14,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/health', healthRouter);
+app.use('/auth', authRouter);
 app.use('/:resource', resourceRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {

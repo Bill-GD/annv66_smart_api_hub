@@ -1,5 +1,6 @@
 import express from 'express';
 import ResourceController from '../controllers/resource.controller';
+import blockResources from '../middlewares/block-users.middleware';
 import filtering from '../middlewares/filtering.middleware';
 import pagination from '../middlewares/pagination.middleware';
 import relation from '../middlewares/relation.middleware';
@@ -20,8 +21,8 @@ router.get('/',
   ResourceController.getAll,
 );
 
-router.post('/', ResourceController.postOne);
 router.get('/:id', validateFields, relation, ResourceController.getOne);
+router.post('/', blockResources('users'), ResourceController.postOne);
 router.put('/:id', ResourceController.putOne);
 router.patch('/:id', ResourceController.patchOne);
 router.delete('/:id', ResourceController.deleteOne);

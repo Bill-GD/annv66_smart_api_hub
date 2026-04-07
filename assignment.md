@@ -46,7 +46,7 @@
 
 ### 5. Authentication & Authorization (1.5đ)
 
-- [ ] `POST /auth/register` (hash password) & `POST /auth/login` (cấp JWT).
+- [x] `POST /auth/register` (hash password) & `POST /auth/login` (cấp JWT).
 - [ ] Middleware bảo vệ routes: **Write (C/U/D)** → Cần Token (User); **DELETE** → Chỉ `admin` được xoá.
 
 ### 6. Production Ready (1.5đ)

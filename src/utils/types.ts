@@ -40,3 +40,10 @@ export type ResourceResponse = Response<
     }
   }
 >;
+
+export type User = {
+  username: string;
+  email: string;
+  password: string;
+  role: 'user' | 'admin';
+};
