@@ -19,6 +19,7 @@ export type ResourceRequest = Request<
 export type ResourceResponse = Response<
   any,
   {
+    user: User,
     columns: string[],
     pagination: { offset: number, limit: number },
     sorting: { field: string, order: 'asc' | 'desc' },
@@ -42,6 +43,7 @@ export type ResourceResponse = Response<
 >;
 
 export type User = {
+  id: number;
   username: string;
   email: string;
   password: string;

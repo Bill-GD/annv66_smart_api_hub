@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 import db from '../database/knex';
+import { checkField } from '../utils/helpers';
 import { NotFoundError } from '../utils/http-error';
 import HttpStatus from '../utils/http-status';
 import { ResourceRequest, ResourceResponse } from '../utils/types';
@@ -109,6 +110,10 @@ export default class ResourceController {
   
   static async postOne(req: ResourceRequest, res: ResourceResponse) {
     const { resource: tableName } = req.params;
+    const { user: { id: userId } } = res.locals;
+    if (await checkField(tableName, 'user_id')) {
+      req.body = { ...req.body, user_id: userId };
+    }
     const [{ id: newId }] = await db(tableName).insert(req.body, ['id']);
     res.status(HttpStatus.CREATED).json({
       id: newId,
@@ -125,6 +130,10 @@ export default class ResourceController {
     
     const count = +(result?.count ?? 0);
     if (count <= 0) {
+      const { user: { id: userId } } = res.locals;
+      if (await checkField(tableName, 'user_id')) {
+        req.body = { ...req.body, user_id: userId };
+      }
       await db(tableName).insert({ id, ...req.body });
       res.status(HttpStatus.CREATED).json({ id: +id });
     } else {

@@ -31,7 +31,7 @@ export default class AuthController {
     const payload = req.body;
     
     const user: User = await db('users')
-      .select('username', 'email', 'password', 'role')
+      .select('id', 'username', 'email', 'password', 'role')
       .where({ email: payload.email })
       .first();
     

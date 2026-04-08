@@ -51,7 +51,7 @@
 
 ### 6. Production Ready (1.5đ)
 
-- [ ] **Global Error Handler**: Bắt lỗi server, DB không bị crash. Response chuẩn `{ "error": "message" }`.
+- [x] **Global Error Handler**: Bắt lỗi server, DB không bị crash. Response chuẩn `{ "error": "message" }`.
 - [ ] **Validation (Zod)**: Bắt buộc check format ở Register, Login và các POST/PUT endpoints. Trả HTTP 400.
 - [ ] **Testing**: Viết tối thiểu **10 Test Cases** (Vitest + Supertest) cover đủ Happy path, Lỗi 400/401/403/404.
 
