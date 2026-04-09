@@ -1,10 +1,15 @@
 import request from 'supertest';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import CryptoService from '../src/services/crypto.service';
 import { expectHttpError, mockDBObject } from '../src/utils/test-helper';
 
 describe('/auth', () => {
   describe('/login', () => {
+    afterEach(() => {
+      vi.clearAllMocks();
+      vi.resetModules();
+    });
+    
     it('returns 200 and token on successful login', async () => {
       vi.spyOn(mockDBObject(), 'first')
         .mockResolvedValue({
@@ -60,6 +65,11 @@ describe('/auth', () => {
   });
   
   describe('/register', () => {
+    afterEach(() => {
+      vi.clearAllMocks();
+      vi.resetModules();
+    });
+    
     it('returns 201 on successful registration', async () => {
       vi.spyOn(mockDBObject(), 'first').mockResolvedValue(undefined);
       vi.spyOn(mockDBObject(), 'insert').mockResolvedValue([1]);
