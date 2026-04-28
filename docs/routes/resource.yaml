@@ -1,7 +1,14 @@
 paths:
   /{resource}:
     get:
-      description: Fetch all items of the specified resource, can apply filters.
+      description:
+        "Fetch all items of the specified resource.<br><br>
+        - '_fields': select columns<br>
+        - Pagination: '_page', '_limit'<br>
+        - Sorting: '_sort', '_order' (e.g. '_sort=name&_order=asc' or '_sort=-name')<br>
+        - Filtering: field-based query filters (_like, _ne, _gte, _lte, ...)<br>
+        - Relation: '_expand' / '_embed'<br><br>
+        Swagger UI does not expose these query inputs here, so send the request manually with curl, Postman, etc."
       tags: [ Resource ]
       parameters:
         - $ref: '#/components/parameters/resource'
@@ -24,7 +31,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/resource'
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       requestBody:
         $ref: '#/components/requestBodies/resource'
       responses:
@@ -76,7 +83,7 @@ paths:
         - $ref: '#/components/parameters/resource'
         - $ref: '#/components/parameters/id'
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       requestBody:
         $ref: '#/components/requestBodies/resource'
       responses:
@@ -108,7 +115,7 @@ paths:
         - $ref: '#/components/parameters/resource'
         - $ref: '#/components/parameters/id'
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       requestBody:
         $ref: '#/components/requestBodies/resource'
       responses:
@@ -133,7 +140,7 @@ paths:
         - $ref: '#/components/parameters/resource'
         - $ref: '#/components/parameters/id'
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       responses:
         204:
           $ref: '#/components/responses/204'
