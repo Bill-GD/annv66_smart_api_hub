@@ -6,8 +6,8 @@ paths:
         - '_fields': select columns, comma separated<br>
         - Pagination: '_page', '_limit' (e.g. '_page=3' and/or '_limit=10')<br>
         - Sorting: '_sort', '_order' (e.g. '_sort=name&_order=desc' or '_sort=-name')<br>
-        - Filtering: field-based query filters (_like, _ne, _gte, _lte, ...), format: '<column>:<op>=<value>'<br>
-        - Relation: '_expand=<table>' and/or '_embed=<table>'<br><br>
+        - Filtering: field-based query filters (_like, _ne, _gte, _lte, ...), format: '&lt;column&gt;:&lt;op&gt;=&lt;value&gt;'<br>
+        - Relation: '_expand=&lt;table&gt;' and/or '_embed=&lt;table&gt;'<br><br>
         This Swagger docs UI does not have these query inputs, so send the request manually with curl, Postman, etc."
       tags: [ Resource ]
       parameters:
