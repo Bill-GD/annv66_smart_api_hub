@@ -3,12 +3,12 @@ paths:
     get:
       description:
         "Fetch all items of the specified resource.<br><br>
-        - '_fields': select columns<br>
-        - Pagination: '_page', '_limit'<br>
-        - Sorting: '_sort', '_order' (e.g. '_sort=name&_order=asc' or '_sort=-name')<br>
-        - Filtering: field-based query filters (_like, _ne, _gte, _lte, ...)<br>
-        - Relation: '_expand' / '_embed'<br><br>
-        Swagger UI does not expose these query inputs here, so send the request manually with curl, Postman, etc."
+        - '_fields': select columns, comma separated<br>
+        - Pagination: '_page', '_limit' (e.g. '_page=3' and/or '_limit=10')<br>
+        - Sorting: '_sort', '_order' (e.g. '_sort=name&_order=desc' or '_sort=-name')<br>
+        - Filtering: field-based query filters (_like, _ne, _gte, _lte, ...), format: '<column>:<op>=<value>'<br>
+        - Relation: '_expand=<table>' and/or '_embed=<table>'<br><br>
+        This Swagger docs UI does not have these query inputs, so send the request manually with curl, Postman, etc."
       tags: [ Resource ]
       parameters:
         - $ref: '#/components/parameters/resource'
